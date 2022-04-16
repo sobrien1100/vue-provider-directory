@@ -2,6 +2,7 @@
 <div class=container>
   <Header @toggle-add-provider="toggleAddProvider" title="Provider Directory" :showAddProvider="showAddProvider"/> 
   <AddProvider v-show="showAddProvider" @add-provider="addProvider" />
+  <SortFilter @provider-search="providerSearch" />
   <Providers @delete-provider="deleteProvider" :providers="providers" />
   
 </div>
@@ -11,21 +12,35 @@
 import Header from './components/Header'
 import Providers from './components/Providers'
 import AddProvider from './components/AddProvider'
+import SortFilter from './components/SortFilter'
+import MOCK_DATA from './MOCK_DATA.json'
+
 
 export default {
   name: 'App',
   components: {
     Header, 
     Providers, 
-    AddProvider    
+    AddProvider, 
+    SortFilter
   }, 
   data() {
     return {
-      providers: [],
-      showAddProvider: false
+      providers: MOCK_DATA,
+      filterProviders: [], 
+      showAddProvider: false, 
+      filterText: null, 
     }
   },
   methods: {
+    providerSearch(filterText) {
+      this.providers = MOCK_DATA
+      this.providers = this.providers.filter((provider) => {
+        return provider.first_name.toLowerCase().includes(filterText.toLowerCase())
+      })
+
+      console.log("Providers log After", this.providers)
+    },
     toggleAddProvider() {
       this.showAddProvider = !this.showAddProvider
     },
@@ -36,33 +51,7 @@ export default {
       console.log('provider', email_address)
       this.providers = this.providers.filter((provider) => provider.email_address != email_address )
     }
-  },
-  created() {
-    this.providers = [
-        {
-          "last_name": "Harris",
-          "first_name": "Mike",
-          "email_address": "mharris@updox.com",
-          "specialty": "Pediatrics",
-          "practice_name": "Harris Pediatrics"
-        },
-        {
-          "last_name": "Carlson",
-          "first_name": "Mike",
-          "email_address": "mcarlson@updox.com",
-          "specialty": "Orthopedics",
-          "practice_name": "Carlson Orthopedics"
-        },
-        {
-          "last_name": "Juday",
-          "first_name": "Tobin",
-          "email_address": "tjuday@updox.com",
-          "specialty": "General Medicine",
-          "practice_name": "Juday Family Practice"
-        }
-    ]
-
-  }
+  }, 
 }
 </script>
 
