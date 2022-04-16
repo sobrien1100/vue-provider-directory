@@ -6,7 +6,7 @@
       type="text" 
       v-model="first_name" 
       name="first_name" 
-      placeholder="Enter First Name" />
+      placeholder="Enter First Name **(Required)**" />
     </div>
     <div class="form-control">
       <label>Last Name</label>
@@ -14,7 +14,7 @@
         type="text"
         v-model="last_name"
         name="last_name"
-        placeholder="Enter Last Name"
+        placeholder="Enter Last Name **(Required)**"
       />
     </div>
      <div class="form-control">
@@ -23,7 +23,7 @@
         type="text"
         v-model="email_address"
         name="email_address"
-        placeholder="example@example.com"
+        placeholder="example@example.com **(Required)**"
       />
     </div>
      <div class="form-control">
@@ -63,8 +63,8 @@ export default {
   methods: {
     onSubmit(e) {
       e.preventDefault()
-      if (!this.first_name) {
-        alert('Please add a Provider')
+      if (!this.first_name || !this.last_name || !this.email_address) {
+        alert('Missing Required field')
         return
       }
       const newProvider = {

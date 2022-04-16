@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     providerSort(sortText) {
+      // Allows for flipping of asc and desc
       if (this.sortField === sortText) {
         switch (this.sortDirection) {
           case null:
@@ -64,7 +65,7 @@ export default {
           this.providers.sort((a, b) => {
             const sign =
               a.first_name.toLowerCase() > b.first_name.toLowerCase() ? 1 : -1;
-            return this.sortDirection === "asc" ? sign : -sign;
+            return this.sortDirection === "asc" ? sign : -sign; // reverse the list if we're desc
           });
           break;
         case "last":
