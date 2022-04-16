@@ -1,7 +1,9 @@
 <template>
     <header>
         <h1>{{ title }}</h1>
-        <Button text="Add Provider" color="green"/>
+        <Button @toggle-add-provider="$emit('toggle-add-provider')" 
+        :text="showAddProvider ? 'Close' : 'Add Provider'" 
+        :color="showAddProvider ? 'red' : 'green'"/>
     </header>
 </template>
 
@@ -12,6 +14,7 @@ export default {
     name: 'Header',
     props: {
         title: String,
+        showAddProvider: Boolean
     },
     components: {
     Button,    

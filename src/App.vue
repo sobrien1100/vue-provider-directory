@@ -1,7 +1,7 @@
 <template>
 <div class=container>
-  <Header title="Provider Directory"/> 
-  <AddProvider @add-provider="addProvider" />
+  <Header @toggle-add-provider="toggleAddProvider" title="Provider Directory" :showAddProvider="showAddProvider"/> 
+  <AddProvider v-show="showAddProvider" @add-provider="addProvider" />
   <Providers @delete-provider="deleteProvider" :providers="providers" />
   
 </div>
@@ -21,10 +21,14 @@ export default {
   }, 
   data() {
     return {
-      providers: []
+      providers: [],
+      showAddProvider: false
     }
   },
   methods: {
+    toggleAddProvider() {
+      this.showAddProvider = !this.showAddProvider
+    },
     addProvider(provider) {
       this.providers = [...this.providers, provider]
     }, 
