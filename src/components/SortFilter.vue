@@ -1,11 +1,10 @@
 <template>
-        <h3>Sort By Name</h3>
+        <h3>Search By Name</h3>
         <div class="form-control">
-        <label>Sort</label>
         <input 
             type="text" 
             v-model="filterText" 
-            placeholder="Enter Filter Text"
+            placeholder="Enter Search Text"
             @input="onSearch(filterText)" />
         </div>
 </template>

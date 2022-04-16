@@ -39,6 +39,15 @@ export default {
         return provider.first_name.toLowerCase().includes(filterText.toLowerCase())
       })
 
+      console.log("providers after first name search", this.providers)
+
+      if(this.providers.length === 0) {
+        this.providers = MOCK_DATA
+        this.providers = this.providers.filter((provider) => {
+        return provider.last_name.toLowerCase().includes(filterText.toLowerCase())
+        })
+      }
+
       console.log("Providers log After", this.providers)
     },
     toggleAddProvider() {
