@@ -1,19 +1,23 @@
 <template>
 <div class=container>
   <Header title="Provider Directory"/> 
+  <AddProvider @add-provider="addProvider" />
   <Providers @delete-provider="deleteProvider" :providers="providers" />
+  
 </div>
 </template>
 
 <script>
 import Header from './components/Header'
 import Providers from './components/Providers'
+import AddProvider from './components/AddProvider'
 
 export default {
   name: 'App',
   components: {
     Header, 
-    Providers    
+    Providers, 
+    AddProvider    
   }, 
   data() {
     return {
@@ -21,6 +25,9 @@ export default {
     }
   },
   methods: {
+    addProvider(provider) {
+      this.providers = [...this.providers, provider]
+    }, 
     deleteProvider(email_address) {
       console.log('provider', email_address)
       this.providers = this.providers.filter((provider) => provider.email_address != email_address )
